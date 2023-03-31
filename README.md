@@ -39,6 +39,17 @@ There are two main ways to use **bash-gpt.sh**: with a script and with a shortcu
 
 Now you can use **bash-gpt.sh** from anywhere in **i3wm** by pressing `$mod+Shift+c` and generating awesome text with OpenAI's GPT models! 🤖
 
+## Limitations 🚫
+**bash-gpt.sh** cannot handle double quotes very well. When you use double quotes in your input prompt, **bash-gpt.sh** replaces them with backslashes, which may cause unexpected behavior. To avoid this issue, use single quotes in your input prompt instead.
+
+Additionally, **bash-gpt.sh** is dependent on several packages, including rofi, xclip, curl, and jq. If any of these packages are missing or outdated, **bash-gpt.sh** may not function as expected. Therefore, it is important to make sure that all dependencies are properly installed and up-to-date before using bash-gpt.sh.
+
+👉 Note: The limitations mentioned above are subject to change as the script evolves over time. Please check the project's Github repository for the latest updates and known issues.
+
+
+
+
+
 ## Contributing 💪
 If you find any issues with **bash-gpt.sh** or want to contribute to the project, feel free to create an issue or a pull request on the Github repository. We welcome all contributions and suggestions! 🙏
 
