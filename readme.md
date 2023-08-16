@@ -25,7 +25,7 @@ There are two main ways to use **gpt.sh**: with a script and with a shortcut.
 ## Using **gpt.sh** with a script 📜
 1) Download the **gpt.sh** file. 📥
 2) Open the file and replace the default options (key, model and temperature) with your own. 🔑
-3) Run the script by typing bash **gpt.sh** in your terminal like: `bashGPT.sh "List me the top 10 games of all time"`. 🖥️
+3) Run the script by typing bash **gpt.sh** in your terminal like: `gpt.sh "List me the top 10 games of all time"`. 🖥️
 4) That's it! **gpt.sh** will query the OpenAI API using your chosen model and temperature, and copy the generated text to your clipboard using xclip. 📋
 
 ## Using **gpt.sh** with i3wm 🐧
@@ -54,4 +54,4 @@ Additionally, **gpt.sh** is dependent on several packages, including rofi, xclip
 If you find any issues with **gpt.sh** or want to contribute to the project, feel free to create an issue or a pull request on the Github repository. We welcome all contributions and suggestions! 🙏
 
 ## License 📄
-BashGPT.sh is licensed under the MIT License. Use it, modify it, have fun with it! 😎
+gpt.sh is licensed under the MIT License. Use it, modify it, have fun with it! 😎
