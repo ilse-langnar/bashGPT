@@ -14,7 +14,7 @@ rofi_prompt() {
 add_history() {
     question="$1"
     answer="$2"
-    echo "$question: $answer" >> $HOME/.bashgtp_history
+    echo "$question: $answer" >> $HOME/.bashgpt_history
 }
 
 if [[ "$1" == "" ]]; then
@@ -46,7 +46,7 @@ if [[ "$1" == "" ]]; then
 elif [[ "$1" == "@history" ]]; then
     # bash gpt.sh "history"; # open your history
     
-    selected=$(cat "$HOME/.bashgtp_history" | rofi -dmenu -p "ChatGPT History: ")
+    selected=$(cat "$HOME/.bashgpt_history" | rofi -dmenu -p "ChatGPT History: ")
     echo "$selected" | xclip -selection clipboard # copy to clipboard
 
 else
@@ -67,4 +67,5 @@ else
     echo "$answer" | xclip -selection clipboard # copy to clipboard
     espeak -s 300 "$answer"
     add_history "$question" "$answer"
+    echo $answer
 fi
