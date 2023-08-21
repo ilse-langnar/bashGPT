@@ -3,6 +3,12 @@
 Welcome to **gpt.sh**, the hacker's way to call OpenAI's GPT models from Bash! This script allows you to easily query the OpenAI API from anywhere, using the latest and greatest GPT models available💻.
 ![Bash GPT In Action](./bash-gpt.gif)
 
+
+## Usage
+Rofi Prompt: `bash gpt.sh`
+command Line: `bash gpt.sh "1+1"`
+History Exploration: `bash gpt.sh "@history"`
+
 ## Dependencies & Installation 📦
 Before you can start using **gpt.sh**, you'll need to install a few *dependencies*. You can do this by running the following command:
 
