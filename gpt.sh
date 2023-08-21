@@ -36,7 +36,8 @@ if [[ "$1" == "" ]]; then
             \"temperature\": $temperature
         }" | jq '.choices[0].message.content' )
 
-    answer=$( echo "$answer" | sed 's/\\n//g' ) # Removes newlines(will change)
+    answer=$(echo "$answer" | sed 's/\\n/\
+/g')  # Replaces escaped \n with literal newline
 
     rofi -e "$answer" # display
     echo "$answer" | xclip -selection clipboard # copy to clipboard
@@ -62,10 +63,11 @@ else
             \"temperature\": $temperature
         }" | jq '.choices[0].message.content' )
 
+    answer=$(echo "$answer" | sed 's/\\n/\
+/g')  # Replaces escaped \n with literal newline
 
-    answer=$( echo "$answer" | sed 's/\\n//g' ) # Removes newlines(will change)
     echo "$answer" | xclip -selection clipboard # copy to clipboard
     espeak -s 300 "$answer"
     add_history "$question" "$answer"
-    echo $answer
+    echo -n "$answer"
 fi
