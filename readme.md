@@ -5,8 +5,11 @@ Welcome to **gpt.sh**, the hacker's way to call OpenAI's GPT models from Bash! T
 
 
 ## Usage
+
 Rofi Prompt: `bash gpt.sh`
+
 command Line: `bash gpt.sh "1+1"`
+
 History Exploration: `bash gpt.sh "@history"`
 
 ## Dependencies & Installation 📦
