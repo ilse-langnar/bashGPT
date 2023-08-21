@@ -46,6 +46,10 @@ Additionally, **gpt.sh** is dependent on several packages, including rofi, xclip
 
 👉 Note: The limitations mentioned above are subject to change as the script evolves over time. Please check the project's Github repository for the latest updates and known issues.
 
+## Todo:
++Memory(It knowed the last questions/answers)
++Newlines(It removes newline and gives you a single stream this is bad, particularly for code)
++History(You can search old prompts with rofi)
 
 
 
