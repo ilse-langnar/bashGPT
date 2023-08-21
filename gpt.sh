@@ -11,45 +11,60 @@ rofi_prompt() {
     echo "" | rofi -dmenu -p "ChatGPT(3.5-turbo) "
 }
 
-# bash bash-gpt.sh, uses rofi
+add_history() {
+    question="$1"
+    answer="$2"
+    echo "$question: $answer" >> $HOME/.bashgtp_history
+}
+
 if [[ "$1" == "" ]]; then
-    query=$( rofi_prompt )
-    query=$( echo "$query" | tr '\"' '`' )
+    # bash gpt.sh, uses rofi
+    question=$( rofi_prompt )
+    question=$( echo "$question" | tr '\"' '`' )
 
     # BUGFIX: Avoid empty queries
-    if [[ "$query" = "" ]]; then
+    if [[ "$question" = "" ]]; then
         exit 1
     fi
 
-    result=$(curl -s https://api.openai.com/v1/chat/completions \
+    answer=$(curl -s https://api.openai.com/v1/chat/completions \
         -H "Content-Type: application/json" \
         -H "Authorization: Bearer $OPEN_AI_API_KEY" \
         -d "{
             \"model\": \"$model\",
-            \"messages\": [{ \"role\": \"user\", \"content\": \"Avoid giving answers with triple backsticks. You answer should not be in markdown, nor should it include backsticks. Follow the Intructions: $query\" }],
+            \"messages\": [{ \"role\": \"user\", \"content\": \"Avoid giving answers with triple backsticks. You answer should not be in markdown, nor should it include backsticks. Follow the Intructions: $question\" }],
             \"temperature\": $temperature
         }" | jq '.choices[0].message.content' )
 
-    result=$( echo "$result" | sed 's/\\n//g' )
-        rofi -e "$result"
+    answer=$( echo "$answer" | sed 's/\\n//g' ) # Removes newlines(will change)
 
-    # Copy to clipboard & Talk
-    echo "$result" | xclip -selection clipboard
-    espeak -s 300 "$result"
+    rofi -e "$answer" # display
+    echo "$answer" | xclip -selection clipboard # copy to clipboard
+    espeak -s 300 "$answer"
+    add_history "$question" "$answer"
 
-else # bash gpt.sh "List me 2 games"
-    query="$1"
+elif [[ "$1" == "@history" ]]; then
+    # bash gpt.sh "history"; # open your history
+    
+    selected=$(cat "$HOME/.bashgtp_history" | rofi -dmenu -p "ChatGPT History: ")
+    echo "$selected" | xclip -selection clipboard # copy to clipboard
 
-    result=$(curl -s https://api.openai.com/v1/chat/completions \
+else
+    # bash gpt.sh "List me 2 games"; # 1. <game> 2. <game>
+    question="$1"
+
+    answer=$(curl -s https://api.openai.com/v1/chat/completions \
         -H "Content-Type: application/json" \
         -H "Authorization: Bearer $OPEN_AI_API_KEY" \
         -d "{
             \"model\": \"$model\",
-            \"messages\": [{ \"role\": \"user\", \"content\": \"$query\" }],
+            \"messages\": [{ \"role\": \"user\", \"content\": \"$question\" }],
             \"temperature\": $temperature
         }" | jq '.choices[0].message.content' )
 
-    # Copy to clipboard & Talk
-    result=$( echo "$result" | sed 's/\\n//g' )
-    espeak -s 300 "$result"
+
+    answer=$( echo "$answer" | sed 's/\\n//g' ) # Removes newlines(will change)
+    echo "$answer" | xclip -selection clipboard # copy to clipboard
+    espeak -s 300 "$answer"
+    add_history "$question" "$answer"
 fi
